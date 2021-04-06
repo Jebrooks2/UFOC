@@ -1,0 +1,23 @@
+.body {
+    background-color: midnightblue;
+}
+.h1 {
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    padding-top: 100px;
+}
+.input {
+    display: grid;
+    margin: 10px auto auto;
+}
+.h2 {
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 20px;
+}
+.button {
+    display: grid;
+    margin: 10px auto auto;
+}
