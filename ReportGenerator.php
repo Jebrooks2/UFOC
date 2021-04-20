@@ -83,6 +83,8 @@ if (isset($_POST['submit'])) {
 	$sql5 = "select * from nominates where NominatorFacID like \"%$faculty%\"";
 	//votes cast by faculty
 	$sql6 = "select * from votes where FacID like \"%$faculty%\"";
+	//elections committees that faculty member is a part of has had
+	$sql7 = "select * from election where Committee_CommitteeID in (select CommitteeID from committee where CommitteeID in (select b.ComID from belongsto b where b.FacID like \"%$faculty%\"))";
 	
 	$result = $conn-> query($sql);
 	if ($result-> num_rows > 0) {
@@ -142,6 +144,16 @@ if (isset($_POST['submit'])) {
 		}
 	} else {
 		echo"<br><br>No votes found";
+	}
+	
+	$result = $conn-> query($sql7);
+	if ($result-> num_rows > 0) {
+		
+		while($row = $result->fetch_assoc()) {
+			echo "<br><br>Elections: <b><br> ElectionID: </b>". $row["ElectionID"]."<b> Results: </b>". $row["Results"]."<b> Nominates: </b>". $row["Nominates"]."<b> CommitteeID: </b>". $row["Committee_CommitteeID"];
+		}
+	} else {
+		echo"<br><br>No elections found";
 	}
 
 }
